@@ -1,14 +1,15 @@
+import ExpenseDate from "./ExpenseDate";
 import './ExpenseItem.css';
 
 //object destructuring instead of props in ()
-function ExpenseItem({date, title, amount}) {
+function ExpenseItem(props) {
 
     return (
         <div className="expense-item">
-            <div>{date.toDateString()}</div>
+            <ExpenseDate date = {props.date} />
             <div className='expense-item__description'>
-                <h2>{title}</h2>
-                <div className='expense-item__price'>${amount}</div>
+                <h2>{props.title}</h2>
+                <div className='expense-item__price'>${props.amount}</div>
             </div>
         </div>
     );
