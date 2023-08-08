@@ -13,32 +13,32 @@ const ExpenseForm = (props) => {
     //     enteredDate : ''
     // })
 
-    const titleChangeHandler = (event) => {
-        setEnteredTitle(event.target.value);
-        // setUserInput({
-        //     ...userInput,
-        //     enteredTitle: event.target.value,
-        // })
-        // setUserInput((prevState) => {
-        //     return {
-        //         ...prevState, enteredTitle: event.target.value
-        //     };
-        // });
-    }
-    const amountChangeHandler = (event) => {
-        setEnteredAmount(event.target.value);
-        // setUserInput({
-        //     ...userInput,
-        //     enteredAmount: event.target.value,
-        // })
-    }
-    const dateChangeHandler = (event) => {
-        setEnteredDate(event.target.value);
-        // setUserInput({
-        //     ...userInput,
-        //     enteredDate: event.target.value,
-        // })
-    }
+    // const titleChangeHandler = (event) => {
+    //     setEnteredTitle(event.target.value);
+    //     // setUserInput({
+    //     //     ...userInput,
+    //     //     enteredTitle: event.target.value,
+    //     // })
+    //     // setUserInput((prevState) => {
+    //     //     return {
+    //     //         ...prevState, enteredTitle: event.target.value
+    //     //     };
+    //     // });
+    // }
+    // const amountChangeHandler = (event) => {
+    //     setEnteredAmount(event.target.value);
+    //     // setUserInput({
+    //     //     ...userInput,
+    //     //     enteredAmount: event.target.value,
+    //     // })
+    // }
+    // const dateChangeHandler = (event) => {
+    //     setEnteredDate(event.target.value);
+    //     // setUserInput({
+    //     //     ...userInput,
+    //     //     enteredDate: event.target.value,
+    //     // })
+    // }
 
     const inputChangeHandler = (identifier, value) => {
         if (identifier === 'title') {
@@ -65,25 +65,27 @@ const ExpenseForm = (props) => {
         setEnteredDate('');
     };
 
-    return <form onSubmit={submitHandler}>
-        <div className='new-expense__controls'>
-            <div className='new-expense__control'>
-                <label>Title</label>
-                <input type="text" value={enteredTitle} onChange={(event) => inputChangeHandler('title', event.target.value)} />
+    return (
+        <form onSubmit={submitHandler}>
+            <div className='new-expense__controls'>
+                <div className='new-expense__control'>
+                    <label>Title</label>
+                    <input type="text" value={enteredTitle} onChange={(event) => inputChangeHandler('title', event.target.value)} />
+                </div>
+                <div className='new-expense__control'>
+                    <label>Amount</label>
+                    <input type="number" value={enteredAmount} min="0.01" step="0.01" onChange={(event) => inputChangeHandler('amount', event.target.value)} />
+                </div>
+                <div className='new-expense__control'>
+                    <label>Date</label>
+                    <input type="date" value={enteredDate} min="2019-01-01" step="2023-12-31" onChange={(event) => inputChangeHandler('date', event.target.value)} />
+                </div>
             </div>
-            <div className='new-expense__control'>
-                <label>Amount</label>
-                <input type="number" value={enteredAmount} min="0.01" step="0.01" onChange={(event) => inputChangeHandler('amount', event.target.value)} />
+            <div className='new-expense__actions'>
+                <button type='submit'>Add Expense</button>
             </div>
-            <div className='new-expense__control'>
-                <label>Date</label>
-                <input type="date" value={enteredDate} min="2019-01-01" step="2023-12-31" onChange={(event) => inputChangeHandler('date', event.target.value)} />
-            </div>
-        </div>
-        <div className='new-expense__actions'>
-            <button type='submit'>Add Expense</button>
-        </div>
-    </form>
+        </form>
+    )
 };
 
 export default ExpenseForm;
