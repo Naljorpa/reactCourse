@@ -3,42 +3,10 @@ import React, { useState } from 'react';
 import "./ExpenseForm.css";
 
 const ExpenseForm = (props) => {
+    const [showForm, setShowForm] = useState(false);
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAmount, setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
-
-    // const [userInput, setUserInput] = useState({
-    //     enteredTitle: '',
-    //     enteredAmount: '',
-    //     enteredDate : ''
-    // })
-
-    // const titleChangeHandler = (event) => {
-    //     setEnteredTitle(event.target.value);
-    //     // setUserInput({
-    //     //     ...userInput,
-    //     //     enteredTitle: event.target.value,
-    //     // })
-    //     // setUserInput((prevState) => {
-    //     //     return {
-    //     //         ...prevState, enteredTitle: event.target.value
-    //     //     };
-    //     // });
-    // }
-    // const amountChangeHandler = (event) => {
-    //     setEnteredAmount(event.target.value);
-    //     // setUserInput({
-    //     //     ...userInput,
-    //     //     enteredAmount: event.target.value,
-    //     // })
-    // }
-    // const dateChangeHandler = (event) => {
-    //     setEnteredDate(event.target.value);
-    //     // setUserInput({
-    //     //     ...userInput,
-    //     //     enteredDate: event.target.value,
-    //     // })
-    // }
 
     const inputChangeHandler = (identifier, value) => {
         if (identifier === 'title') {
@@ -65,7 +33,17 @@ const ExpenseForm = (props) => {
         setEnteredDate('');
     };
 
-    return (
+    const toggleFormHandler = () => {
+        setShowForm(!showForm);
+    };
+
+    const panel = (
+        <div className='new-expense__panel'>
+            <button onClick={toggleFormHandler}>Add New Expense</button>
+        </div>
+    );
+
+    const form = (
         <form onSubmit={submitHandler}>
             <div className='new-expense__controls'>
                 <div className='new-expense__control'>
@@ -81,10 +59,21 @@ const ExpenseForm = (props) => {
                     <input type="date" value={enteredDate} min="2019-01-01" step="2023-12-31" onChange={(event) => inputChangeHandler('date', event.target.value)} />
                 </div>
             </div>
-            <div className='new-expense__actions'>
-                <button type='submit'>Add Expense</button>
+            <div className='new-expense__flex'>
+                <div className='new-expense__cancel'>
+                    <button onClick={toggleFormHandler}>Cancel</button>
+                </div>
+                <div className='new-expense__actions'>
+                    <button type='submit'>Add Expense</button>
+                </div>
             </div>
         </form>
+    );
+
+    return (
+        <div>
+            {showForm ? form : panel}
+        </div>
     )
 };
 
